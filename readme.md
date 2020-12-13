@@ -63,7 +63,7 @@ import {createDeployClient} from "@ling.black/deploy";
 ### Загрузка и установка nodeJS приложения
 
 ```js
-    // Создадим необходимую директорию и выполним загрузку
+// Создадим необходимую директорию и выполним загрузку
 await deploy.shell.command("cd /home/user/tests && mkdir -p app");
 await deploy.sftp.uploadDirectory("./myExpressApp", "/home/user/tests/app");
 
@@ -74,7 +74,7 @@ await deploy.shell.command("cd /home/diego/tests/app && yarn");
 Можно упростить в:
 
 ```js
-    await deploy.nodeJSUploadAndInstall("./myExpressApp", "/home/user/tests/app");
+await deploy.nodeJSUploadAndInstall("./myExpressApp", "/home/user/tests/app");
 ```
 
 Таким образом, загрузка и установка упакованы в один метод. Однако нам все еще надо установить и запустить. Окей,
@@ -83,7 +83,7 @@ await deploy.shell.command("cd /home/diego/tests/app && yarn");
 ### Deploy nodeJS приложения
 
 ```js
-    await deploy.nodeJSDeployApp({
+await deploy.nodeJSDeployApp({
     localPath: "./myExpressApp",
     remotePath: "/home/user/tests/app",
     install: true,
@@ -100,7 +100,7 @@ await deploy.shell.command("cd /home/diego/tests/app && yarn");
 удобном виде:
 
 ```js
-    await deploy.nodeJSDeployExpressApp({
+await deploy.nodeJSDeployExpressApp({
     localPath: "./myExpressApp",
     remotePath: "/home/user/tests/app",
     install: true,
