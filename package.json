@@ -1,23 +1,19 @@
 {
   "name": "@ling.black/deploy",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": {
     "name": "Yakov V. Ling",
     "url": "https://ling.black",
     "email": "daikiri@ling.black"
   },
-  "main": "src/index.ts",
+  "main": "dist/index.ts",
   "license": "MIT",
   "scripts": {
     "build": "tsc",
     "prepublishOnly": "yarn build"
   },
-  "bin": {
-    "bdpl": "./dist/index.js"
-  },
   "files": [
-    "dist",
-    "bin"
+    "dist"
   ],
   "dependencies": {
     "@ling.black/log": "^1.0.0",

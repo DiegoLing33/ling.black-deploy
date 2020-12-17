@@ -38,8 +38,9 @@ import * as path from "path";
 import {LType} from "@ling.black/log";
 import Logger from "./Logger";
 import {SFTPWrapper} from "ssh2";
+import DeploySSHClient from "./DeploySSHClient";
 
-export function uploadDir(conn: SFTPWrapper, remotePath: string, localPath: string): Promise<string> {
+export function uploadDir(ssh: DeploySSHClient, conn: SFTPWrapper, remotePath: string, localPath: string): Promise<string> {
 	return new Promise<string>(async (resolve, reject) => {
 		try {
 			const __path = path.resolve(localPath);
@@ -48,10 +49,11 @@ export function uploadDir(conn: SFTPWrapper, remotePath: string, localPath: stri
 			for (const file of files) {
 				const fn = file.replace(dirName, '');
 				const rmPath = remotePath + fn;
-				Logger.log('File', LType.info(fn), "-->", LType.info(rmPath));
+				await ssh.command("mkdir -p " + remotePath);
+				Logger.log('File', LType.info(file), "-->", LType.info(rmPath));
 				await (async () => {
 					return new Promise((res, rej) => {
-						conn.fastPut(file, rmPath, {}, err => {
+						conn.fastPut(file, rmPath, err => {
 							if (err) rej(err);
 							else res('ok');
 						});
